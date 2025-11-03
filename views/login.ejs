@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - EcoCleanSystem</title>
+  <link rel="stylesheet" href="/css/login.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <main class="main-container">
+    <main class="login-container">
+      <div class="login-box">
+        <h2>Faça Login</h2>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <form method="POST" action="/login">
+          <div class="input-group">
+            <label for="identificador">Usuário</label>
+            <input 
+              type="text" 
+              id="identificador" 
+              name="identificador" 
+              required 
+              value="<%= typeof identificador !== 'undefined' ? identificador : '' %>"
+              placeholder="Digite seu usuário"
+            >
+          </div>
+
+          <div class="input-group">
+            <label for="senha">Senha</label>
+            <input 
+              type="password" 
+              id="senha" 
+              name="senha" 
+              required 
+              placeholder="Digite sua senha"
+            >
+          </div>
+
+          <button type="submit" class="login-btn">ENTRAR</button>
+        </form>
+
+        <br>
+        <div class="links">
+          <a href="/cadastro" style="color: #4BA1BB; text-decoration: none;">Ainda não tem uma conta? Cadastre-se!</a>
+        </div>
+      </div>
+    </main>
+  </main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title || 'EcoCleanSystem' %></title>
+  
+  <link rel="stylesheet" href="/css/layout.css" />
+  
+  <link rel="stylesheet" href="/css/nav.css" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  
+  <% if (typeof customCss !== 'undefined' && customCss) { %>
+    <link rel="stylesheet" href="<%= customCss %>" />
+  <% } %>
+  
+  <meta name="description" content="Sistema de gestão EcoCleanSystem - Controle de atendimentos e materiais" />
+  <meta name="theme-color" content="#23224A" />
+</head>
+<body>
+  <% if (!isLoginPage) { %>
+    <%- include('partials/nav', { activePage: activePage }) %>
+  <% } %>
+
+  <main class="main-container">
+    <%- body %>
+  </main>
+
+  <% if (typeof customScripts !== 'undefined' && customScripts) { %>
+    <%= customScripts %>
+  <% } %>
+
+  <script>
+    function confirmAction(message) {
+      return confirm(message || 'Tem certeza que deseja realizar esta ação?');
+    }
+
+    function showMessage(message, type = 'info') {
+      alert(message);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const forms = document.querySelectorAll('form');
+      forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+          const submitBtn = this.querySelector('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+            
+            setTimeout(() => {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = submitBtn.getAttribute('data-original-text') || 'Enviar';
+            }, 5000);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
